@@ -1,0 +1,22 @@
+name: SellMMGUI
+version: '${project.version}'
+main: com.github.sirokuri_.sellmmgui.SellMMGUI
+api-version: 1.15
+authors: [ 46kuri_ ]
+description: LIFE plugin
+softdepend:
+  - Vault
+
+commands:
+  sellmmgui:
+    description: コンフィグリロード
+    permission: SellMMGUICommand.permission.Admin
+  smg:
+    description: MMアイテム売却
+    permission: SellMMGUICommand.permission.Member
+
+permissions:
+  SellMMGUICommand.permission.Admin:
+    default: op
+  SellMMGUICommand.permission.Member:
+    default: true

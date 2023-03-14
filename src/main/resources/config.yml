@@ -1,0 +1,38 @@
+mmitem:
+  yukiti_ticket:
+    itemdisplay: "&3一万円"
+    sellprice: 10000
+  itiyou_ticket:
+    itemdisplay: "&3五千円"
+    sellprice: 5000
+  syurei_ticket:
+    itemdisplay: "&3二千円"
+    sellprice: 2000
+  noguti_ticket:
+    itemdisplay: "&3千円"
+    sellprice: 1000
+  assyukuwheat:
+    itemdisplay: "圧縮小麦チケット"
+    sellprice: 1920
+  assyukupotato:
+    itemdisplay: "圧縮ポテトチケット"
+    sellprice: 1920
+  assyukucarrot:
+    itemdisplay: "圧縮人参チケット"
+    sellprice: 1920
+  assyukuspruce:
+    itemdisplay: "圧縮松の木チケット"
+    sellprice: 640
+  assyukunether:
+    itemdisplay: "圧縮ネザーラックチケット"
+    sellprice: 320
+  assyukuend:
+    itemdisplay: "圧縮エンドストーンチケット"
+    sellprice: 640
+SellItemDisplay: "----------------------------\n[smg 販売リスト]
+\n&3一万円&r,&3五千円&r
+\n&3二千円&r,&3千円&r
+\n圧縮小麦チケット,圧縮ポテトチケット
+\n圧縮人参チケット,圧縮松の木チケット
+\n圧縮ネザーラックチケット,圧縮エンドストーンチケット
+\n----------------------------"
