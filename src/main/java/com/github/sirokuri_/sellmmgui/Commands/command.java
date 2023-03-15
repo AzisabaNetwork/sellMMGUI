@@ -1,7 +1,10 @@
 package com.github.sirokuri_.sellmmgui.Commands;
 
+import com.github.mori01231.lifecore.util.ItemUtil;
 import com.github.sirokuri_.sellmmgui.SellMMGUI;
 import com.github.sirokuri_.sellmmgui.inventoryHolder.MyHolder;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.util.jnbt.CompoundTag;
 import org.bukkit.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,6 @@ public class command implements CommandExecutor {
         this.plugin = sellMMGUI;
     }
 
-    @SuppressWarnings({"deprecation"})
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
         Player p = (Player) sender;
@@ -33,6 +36,15 @@ public class command implements CommandExecutor {
                 if (sender.hasPermission("SellMMGUICommand.permission.Admin")) {
                     plugin.reload();
                     p.sendMessage("configリロードしました");
+                }
+                return true;
+            }
+            if (args[0].equalsIgnoreCase("check")) {
+                //OP以外起動しないように設定
+                if (sender.hasPermission("SellMMGUICommand.permission.Admin")) {
+                    ItemStack itemStack = p.getInventory().getItemInMainHand();
+                    String mythicType = ItemUtil.getMythicType(itemStack);
+                    p.sendMessage(mythicType);
                 }
                 return true;
             }

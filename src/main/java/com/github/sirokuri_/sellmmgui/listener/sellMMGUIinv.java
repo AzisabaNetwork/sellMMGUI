@@ -1,5 +1,6 @@
 package com.github.sirokuri_.sellmmgui.listener;
 
+import com.github.mori01231.lifecore.util.ItemUtil;
 import com.github.sirokuri_.sellmmgui.SellMMGUI;
 import com.github.sirokuri_.sellmmgui.inventoryHolder.MyHolder;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -12,6 +13,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +92,6 @@ public class sellMMGUIinv implements Listener {
         }
         if(holder.tags.get(0).equals("holder2")){
             ItemStack[] contents = inventory.getContents();
-            List<String> itemDisplayNameList = new ArrayList<>();
             double totalMoney = 0;
             for (String key : plugin.config().getConfigurationSection("mmitem").getKeys(false)) {
                 int moneyamount = plugin.config().getInt("mmitem." + key + ".sellprice");
@@ -102,18 +103,39 @@ public class sellMMGUIinv implements Listener {
                     }
                     int amount = content.getAmount();
                     int money = amount * moneyamount;
+                    ItemMeta itemMeta = content.getItemMeta();
+                    if (itemMeta == null){
+                        continue;
+                    }
                     if (content.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "" + ItemDisplayName))) {
                         totalMoney += money;
-                        itemDisplayNameList.add(ItemDisplayName);
                     }
                 }
             }
+
+            /*ItemStack[] contents = inventory.getContents();
+            for (String key : plugin.config().getConfigurationSection("mmitem").getKeys(false)) {
+                int moneyamount = plugin.config().getInt("mmitem." + key + ".sellprice");
+                for (int i = 0; i < 54; i++) {
+                    ItemStack content = contents[i];
+                    if (content == null || !content.hasItemMeta()) {
+                        continue;
+                    }
+                    String mythicType = ItemUtil.getMythicType(content);
+                    int amount = content.getAmount();
+                    int money = amount * moneyamount;
+                    if (key.equalsIgnoreCase(mythicType)) {
+                        totalMoney += money;
+                    }
+                }
+            }*/
+
             Location loc = player.getLocation();
             player.playSound(loc, Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
             EconomyResponse r = plugin.econ.depositPlayer(player, totalMoney);
             if (r.transactionSuccess()) {
                 player.sendMessage(String.format("[smg]\n\n今回の売却額 : %s\n現在の所持金 : %s", plugin.econ.format(r.amount), plugin.econ.format(r.balance)));
-                Bukkit.getLogger().info(String.format("[smg] " +player.getDisplayName() + "の\n\n売却額 : %s\n現在の所持金 : %s", plugin.econ.format(r.amount), plugin.econ.format(r.balance)));
+                Bukkit.getLogger().info(String.format("[smg] " +player.getDisplayName() + "の売却額 : %s 現在の所持金 : %s", plugin.econ.format(r.amount), plugin.econ.format(r.balance)));
             } else {
                 player.sendMessage(String.format("An error occured: %s", r.errorMessage));
             }
