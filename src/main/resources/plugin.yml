@@ -6,6 +6,8 @@ authors: [ 46kuri_ ]
 description: LIFE plugin
 softdepend:
   - Vault
+  - MythicMobs
+  - LifeCore
 
 commands:
   sellmmgui:
