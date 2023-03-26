@@ -44,6 +44,7 @@ public class command implements CommandExecutor {
                 if (sender.hasPermission("SellMMGUICommand.permission.Admin")) {
                     ItemStack itemStack = p.getInventory().getItemInMainHand();
                     String mythicType = ItemUtil.getMythicType(itemStack);
+                    if (mythicType == null) return true;
                     p.sendMessage(mythicType);
                 }
                 return true;
