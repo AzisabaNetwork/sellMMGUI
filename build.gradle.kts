@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.github.sirokuri_"
-version = "2.0.0"
+version = "2.0.0+1.21.11"
 
 val minecraftVersion = "1.21.11"
 
