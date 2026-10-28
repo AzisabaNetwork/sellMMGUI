@@ -1,28 +1,77 @@
+# 売却可能な MythicMobs アイテム
+#   キー      : MythicMobs のアイテム ID (大文字・小文字は区別しない)
+#   sellprice : 1 個あたりの売却額
+#   display   : 一覧表示用の名前 (& カラーコード可、省略時は ID)
+# 手に持ったアイテムの ID は /sellmmgui check で確認できます
 mmitem:
   yukiti_ticket:
     sellprice: 10000
+    display: "&3一万円"
   itiyou_ticket:
     sellprice: 5000
+    display: "&3五千円"
   syurei_ticket:
     sellprice: 2000
+    display: "&3二千円"
   noguti_ticket:
     sellprice: 1000
+    display: "&3千円"
   assyukuwheat:
     sellprice: 1920
+    display: "圧縮小麦チケット"
   assyukupotato:
     sellprice: 1920
+    display: "圧縮ポテトチケット"
   assyukucarrot:
     sellprice: 1920
+    display: "圧縮人参チケット"
   assyukuspruce:
     sellprice: 640
+    display: "圧縮松の木チケット"
   assyukunether:
     sellprice: 320
+    display: "圧縮ネザーラックチケット"
   assyukuend:
     sellprice: 640
-SellItemDisplay: "----------------------------\n[smg 販売リスト]
-\n&3一万円&r,&3五千円&r
-\n&3二千円&r,&3千円&r
-\n圧縮小麦チケット,圧縮ポテトチケット
-\n圧縮人参チケット,圧縮松の木チケット
-\n圧縮ネザーラックチケット,圧縮エンドストーンチケット
-\n----------------------------"
+    display: "圧縮エンドストーンチケット"
+
+# GUI のタイトル
+gui-title: "&cSELLMMITEM SHOP"
+
+# true : GUI を閉じたときに売却可能なアイテムを自動で売却する
+# false: GUI を閉じると中身はすべて返却される (売却ボタンでのみ売却)
+# どちらの場合も、売却できないアイテムは消えずに返却されます
+sell-on-close: true
+
+# 葉ブロックからトマトを入手する機能
+tomato-drop:
+  enabled: false
+  world: resource
+  block: OAK_LEAVES
+  # 0.0 ~ 1.0
+  chance: 0.1
+  # 道具の判定。tool-mythic-type を設定するとそちらが優先される
+  tool-mythic-type: ""
+  tool-name: "&cトマト採取剣"
+  # {player} はプレイヤー名に置き換わる
+  command: "mm i give {player} tomato 2"
+
+# メッセージ (& カラーコード可)
+messages:
+  prefix: "&8[&csmg&8] &r"
+  player-only: "&cこのコマンドはプレイヤーのみ実行できます"
+  admin-usage: "&e/{label} reload &7- config.yml を再読み込み\n&e/{label} check &7- 手に持ったアイテムの MythicMobs ID と売却額を表示"
+  reload: "&aconfig.yml を再読み込みしました &7(売却可能アイテム: {count}種類)"
+  check: "&aMythicMobs ID: &f{type} &7/ &a売却額: &e{price}"
+  check-not-sellable: "&aMythicMobs ID: &f{type} &7/ &c売却対象外です"
+  check-not-mythic: "&c手に持っているアイテムは MythicMobs アイテムではありません"
+  sold: "&a{count}個のアイテムを &e{amount} &aで売却しました &7(所持金: {balance})"
+  nothing-to-sell: "&7売却できるアイテムが入っていません"
+  sell-failed: "&c売却に失敗しました: {error}"
+  returned: "&e売却しなかったアイテム {count}個 を返却しました"
+  dropped: "&cインベントリがいっぱいのため、一部のアイテムを足元にドロップしました"
+  deposited: "&a売却可能なアイテム {count}個 を投入しました"
+  deposit-none: "&7インベントリに売却可能なアイテムがありません"
+  list-header: "&8----------- &c[smg 売却リスト] &8-----------"
+  list-entry: " &f{display} &7: &e{price}"
+  list-footer: "&8--------------------------------------"

@@ -1,24 +1,28 @@
 name: SellMMGUI
-version: '${project.version}'
+version: '${version}'
 main: com.github.sirokuri_.sellmmgui.SellMMGUI
-api-version: 1.15
+api-version: '${apiVersion}'
 authors: [ 46kuri_ ]
-description: LIFE plugin
-softdepend:
+description: MythicMobsアイテムをGUIで売却するプラグイン
+depend:
   - Vault
+softdepend:
   - MythicMobs
-  - LifeCore
 
 commands:
   sellmmgui:
-    description: コンフィグリロード
+    description: SellMMGUI 管理コマンド (reload / check)
+    usage: /<command> <reload|check>
     permission: SellMMGUICommand.permission.Admin
   smg:
-    description: MMアイテム売却
+    description: MythicMobs アイテム売却 GUI を開く
+    usage: /<command> [list]
     permission: SellMMGUICommand.permission.Member
 
 permissions:
   SellMMGUICommand.permission.Admin:
+    description: 設定の再読み込みと手持ちアイテムの確認
     default: op
   SellMMGUICommand.permission.Member:
+    description: 売却 GUI の使用
     default: true
